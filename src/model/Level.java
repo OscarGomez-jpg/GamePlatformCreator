@@ -32,7 +32,16 @@ public class Level {
         return msg;
     }
 
-    public int countLootByName(){
-        return 0;
+    public int countLootByName(String lootName) {
+        int acu = 0;
+        for (int i = 0; i < AMOUNT_LOOTS; i++) {
+            if (loots[i].getName().equals(lootName)) {
+                acu += 1;
+            }
+        }
+
+        return acu;
     }
+
+    
 }
