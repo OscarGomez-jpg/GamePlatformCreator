@@ -10,6 +10,9 @@ public class Game {
         generateInitialLevels();
     }
     
+    /**
+     * This function creates the 10 levels in which the game consists
+     */
     public void generateInitialLevels() {
         Level newLevel;
         boolean isEmpty = false;
