@@ -7,7 +7,7 @@ public class Level {
     private int amountOfEnemies;
     private int amountOfLoot;
 
-    private Loot [] loots;
+    private Loot[] loots;
 
     public Level(String id, int amountOfEnemies, int amountOfLoot) {
         this.id = id;
@@ -42,6 +42,4 @@ public class Level {
 
         return acu;
     }
-
-    
 }

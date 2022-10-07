@@ -1,16 +1,26 @@
 package model;
 
 public class Game {
-    public final static int LEVELS_INITIAL_SIZE = 10;
+    public final static int LEVELS_SIZE = 10;
     private Level[] levels;
 
-    public String addLevels(Level level) {
-        return "";
+    public Game () {
+        levels = new Level[LEVELS_SIZE];
+
+        generateInitialLevels();
     }
     
     public void generateInitialLevels() {
-        for (int i = 0; i < LEVELS_INITIAL_SIZE; i++) {
-            
+        Level newLevel;
+        boolean isEmpty = false;
+        String id = "";
+        for (int i = 0; i < LEVELS_SIZE && isEmpty == false; i++) {
+            if (levels[i] == null) {
+                id = String.valueOf(id);
+                newLevel = new Level(id, 0, 0);
+                levels[i] = newLevel;
+                isEmpty = true;
+            }
         }
     }
 }
