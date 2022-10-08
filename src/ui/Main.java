@@ -1,12 +1,16 @@
 package ui;
 
+import model.Game;
+
 import java.util.Scanner;
 
 public class Main {
     private Scanner reader;
+    private Game game;
 
     public Main() {
         reader = new Scanner(System.in);
+        game = new Game();
 
     }
 
