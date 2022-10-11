@@ -27,6 +27,22 @@ public class Game {
         }
     }
 
+    /**
+     * This function adds a loot to an especific level
+     * @param levelPos position in which the loot is going to be added
+     * @param loot Loot the user wants to be added
+     * @return message confirming the operation
+     */
+    public String addLootToALevel(int levelPos, Loot loot) {
+        String msg = "No se ha podido encontrar el nivel";
+
+        if (levelPos > 0 && levelPos < LEVELS_SIZE) {
+            msg = levels[levelPos].addLoot(loot);
+        }
+
+        return msg;
+    }
+
     //Thinking if I will have to create an array here and copy from it
     public String mostRepeatedTreasure() {
         String msg = "";

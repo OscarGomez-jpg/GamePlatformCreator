@@ -17,6 +17,11 @@ public class Level {
         this.loots = new Loot[AMOUNT_LOOTS];
     }
 
+    /**
+     * This function adds a loot when finds an empty slot
+     * @param loot The loot to be added
+     * @return a message confirming the operation
+     */
     public String addLoot(Loot loot) {
         String msg = "No se ha podido añadir el loot";
         boolean isEmpty = true;
