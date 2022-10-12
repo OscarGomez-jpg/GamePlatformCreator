@@ -75,12 +75,16 @@ public class Main {
                 msg = uiAddEnemyToALevel();
 
                 System.out.println(msg);
+                
+                break;
             }
 
             case 3: {
                 msg = uiReportEnemiesAndLootsOfLevel();
 
                 System.out.println(msg);
+
+                break;
             }
 
             case 0: {
@@ -142,10 +146,10 @@ public class Main {
             String enemyName = reader.next();
 
             System.out.println("Ingrese el nombre del tipo de enemigo que desea agregar: ");
-            System.out.println("Ogro\n" +
-                    "Abstracto\n" +
-                    "Magico\n" +
-                    "Jefe");
+            System.out.println("* Ogro\n" +
+                    "* Abstracto\n" +
+                    "* Magico\n" +
+                    "* Jefe");
             String type = reader.next();
 
             System.out.println("Ingrese los puntos que dara el enemigo: ");

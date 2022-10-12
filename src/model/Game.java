@@ -21,42 +21,53 @@ public class Game {
                 id = String.valueOf(i + 1);
                 newLevel = new Level(id, 0, 0);
                 this.levels[i] = newLevel;
-                System.out.println(levels[i].toString());
             }
         }
     }
 
     /**
-     * This function adds a loot to an especific level
+     * This function creates a Loot and then adds it to a level given by the user
      * 
-     * @param levelPos position in which the loot is going to be added
-     * @param loot     Loot the user wants to be added
-     * @return message confirming the operation
+     * @param levelPos       The level in which the user is going to add the loot
+     * @param lootName       The name that is going to have the loot
+     * @param URL            The URL corresponding to the image of the loot
+     * @param points         The points that the loot is going to give
+     * @param ammountOfLoots The total of the same loot that is going to be added to
+     *                       the level
+     * @return a String with the result of adding each loot
      */
     public String addLootToALevel(int levelPos, String lootName, String URL, double points, int ammountOfLoots) {
         String msg = "";
         Loot newLoot = new Loot(lootName, URL, points);
 
-        for (int i = 0; i < ammountOfLoots; i++) {
-            msg += this.levels[levelPos - 1].addLoot(newLoot) + "\n";
+        if (levelPos > 0 && levelPos <= LEVELS_SIZE) {
+            for (int i = 0; i < ammountOfLoots; i++) {
+                msg += this.levels[levelPos - 1].addLoot(newLoot) + "\n";
+            }
         }
 
         return msg;
     }
 
     /**
-     * This function adds an Enemy to a level given by the user
+     * This function creates an Enemy and then adds it to a level given by the user
      * 
-     * @param levelPos The id of the level in which the enemy is going to be added
-     * @param enemy    The enemy to be added
-     * @return A message confirming the operation
+     * @param levelPos    The level in which the user is going to add the enemy
+     * @param enemyName   The name that is going to have the enemy
+     * @param type        The type of the enemy given by a String from the user
+     * @param pointsGiven The points the enemy gives once is defeated
+     * @param pointsTaken The points the enemy takes if defeat the player
+     * @return a String confirming the operation
      */
-    public String addEnemyToALevel(int levelPos, String enemyName, String type, double pointsGiven, double pointsTaken) {
+    public String addEnemyToALevel(int levelPos, String enemyName, String type, double pointsGiven,
+            double pointsTaken) {
         String msg = "No se ha podido encontrar el nivel";
 
         Enemy newEnemy = new Enemy(enemyName, type, pointsGiven, pointsTaken);
 
-        msg = this.levels[levelPos - 1].addEnemy(newEnemy);
+        if (levelPos > 0 && levelPos <= LEVELS_SIZE) {
+            msg = this.levels[levelPos - 1].addEnemy(newEnemy);
+        }
 
         return msg;
     }
