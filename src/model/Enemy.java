@@ -1,4 +1,5 @@
 package model;
+
 import java.util.Random;
 
 public class Enemy {
@@ -10,7 +11,7 @@ public class Enemy {
     private int posX;
     private int posY;
 
-    public Enemy(String name, int type, double pointsGiven, double pointsTaken) {
+    public Enemy(String name, String type, double pointsGiven, double pointsTaken) {
         this.random = new Random();
         this.name = name;
         this.pointsGiven = pointsGiven;
@@ -44,15 +45,16 @@ public class Enemy {
         return posY;
     }
 
-    public void setType(int selection) {
-        switch (selection) {
-            case 1:
+    public void setType(String name) {
+        name = name.toLowerCase();
+        switch (name) {
+            case "ogro":
                 this.type = typeEnemy.Ogre;
-            case 2:
+            case "abstracto":
                 this.type = typeEnemy.Abstract;
-            case 3:
+            case "magico":
                 this.type = typeEnemy.Magical;
-            case 4:
+            case "jefe":
                 this.type = typeEnemy.Boss;
         }
     }
@@ -63,5 +65,9 @@ public class Enemy {
 
     public void setPointsTaken(double pointsTaken) {
         this.pointsTaken = pointsTaken;
+    }
+
+    public Random getRandom() {
+        return random;
     }
 }

@@ -37,7 +37,7 @@ public class Game {
         String msg = "No se ha podido encontrar el nivel";
 
         if (levelPos > 0 && levelPos < LEVELS_SIZE) {
-            for (int i = 0; i < ammountOfLoots - 1; i++) {
+            for (int i = 0; i < ammountOfLoots; i++) {
                 msg += levels[levelPos].addLoot(loot) + "\n";
 
             }
