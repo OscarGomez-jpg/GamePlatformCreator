@@ -24,6 +24,7 @@ public class Level {
 
     /**
      * This function adds a loot when finds an empty slot
+     * 
      * @param loot The loot to be added
      * @return a message confirming the operation
      */
@@ -31,8 +32,8 @@ public class Level {
         String msg = "No se ha podido añadir el loot";
         boolean isEmpty = true;
         for (int i = 0; i < AMOUNT_LOOTS && isEmpty == true; i++) {
-            if (loots[i] == null) {
-                loots[i] = loot;
+            if (this.loots[i] == null) {
+                this.loots[i] = loot;
                 msg = "Tesoro agregado con exito";
                 this.totalLoots += 1;
                 isEmpty = false;
@@ -44,6 +45,7 @@ public class Level {
 
     /**
      * This function adds an enemy when finds an empty slot
+     * 
      * @param enemy The enemy to be added
      * @return a message confirming the operation
      */
@@ -82,7 +84,6 @@ public class Level {
         return enemies;
     }
 
-    @Override
     public String toString() {
         return "Level: \n" + "[id=" + id + ", amountOfEnemies=" + amountOfEnemies + ", amountOfLoot=" + amountOfLoot
                 + ", totalEnemies=" + totalEnemies + ", totalLoots=" + totalLoots + "]";

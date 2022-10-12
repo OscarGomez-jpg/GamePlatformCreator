@@ -30,8 +30,6 @@ public class Main {
             main.executeOption(option);
 
         } while (option != 0);
-
-        main.getReader().close();
     }
 
     public int validateIntegerOption() {
@@ -50,7 +48,7 @@ public class Main {
 
     public int getOptionShowMenu() {
         int option = 0;
-        System.out.println("<<<<< Bienvenido al planetario >>>>>");
+        System.out.println("<<<<< Bienvenido a la plataforma de desarrollo de videojuegos >>>>>");
         System.out.println(
                 "1. Agregar un tesoro a un nivel\n" +
                         "2. Agregar un enemigo a un nivel\n" +
@@ -105,15 +103,10 @@ public class Main {
     public String uiAddLootToALevel() {
         String msg = "No se ha podido añadir el tesoro";
 
-        System.out.println("Ingrese el nivel al que quiere agregar el tesoro: ");
-        int levelId = validateIntegerOption();
+        
+            System.out.println("Ingrese el nivel al que quiere agregar el tesoro: ");
+            int levelId = reader.nextInt();
 
-        System.out.println("Ingrese la cantidad que desea agregar del tesosro: ");
-        int amount = validateIntegerOption();
-
-        if (levelId == -1 || amount == -1) {
-            msg = "Por favor introduce un número";
-        } else {
             System.out.println("Ingrese el nombre del tesoro que quiere agregar");
             String lootName = reader.next();
 
@@ -123,10 +116,11 @@ public class Main {
             System.out.println("Ingrese los puntos que dara el tesoro: ");
             double points = reader.nextDouble();
 
-            Loot newLoot = new Loot(lootName, URL, points);
+            System.out.println("Ingrese la cantidad que desea agregar del tesoro: ");
+            int amount = reader.nextInt();
 
-            msg = game.addLootToALevel(levelId, newLoot, amount);
-        }
+            msg = game.addLootToALevel(levelId, lootName, URL, points, amount);
+        
 
         return msg;
     }
@@ -142,7 +136,7 @@ public class Main {
         try {
 
             System.out.println("Ingrese el nivel al que quiere agregar el enemigo: ");
-            int levelId = reader.nextInt() - 1;
+            int levelId = reader.nextInt();
 
             System.out.println("Ingrese el nombre del enemigo que quiere agregar: ");
             String enemyName = reader.next();
@@ -160,9 +154,7 @@ public class Main {
             System.out.println("Ingrese los puntos que quitara el enemigo: ");
             double pointsTaken = reader.nextDouble();
 
-            Enemy newEnemy = new Enemy(enemyName, type, pointsGiven, pointsTaken);
-
-            msg = game.addEnemyToALevel(levelId, newEnemy);
+            msg = game.addEnemyToALevel(levelId, enemyName, type, pointsGiven, pointsTaken);
 
         } catch (Exception inputMismatchException) {
             msg = "Por favor introduce un número";

@@ -5,7 +5,7 @@ public class Game {
     private Level[] levels;
 
     public Game() {
-        levels = new Level[LEVELS_SIZE];
+        this.levels = new Level[LEVELS_SIZE];
 
         generateInitialLevels();
     }
@@ -15,14 +15,13 @@ public class Game {
      */
     public void generateInitialLevels() {
         Level newLevel;
-        boolean isEmpty = false;
         String id = "";
-        for (int i = 0; i < LEVELS_SIZE && isEmpty == false; i++) {
-            if (levels[i] == null) {
-                id = String.valueOf(id);
+        for (int i = 0; i < LEVELS_SIZE; i++) {
+            if (this.levels[i] == null) {
+                id = String.valueOf(i + 1);
                 newLevel = new Level(id, 0, 0);
-                levels[i] = newLevel;
-                isEmpty = true;
+                this.levels[i] = newLevel;
+                System.out.println(levels[i].toString());
             }
         }
     }
@@ -34,13 +33,12 @@ public class Game {
      * @param loot     Loot the user wants to be added
      * @return message confirming the operation
      */
-    public String addLootToALevel(int levelPos, Loot loot, int ammountOfLoots) {
-        String msg = "No se ha podido encontrar el nivel";
+    public String addLootToALevel(int levelPos, String lootName, String URL, double points, int ammountOfLoots) {
+        String msg = "";
+        Loot newLoot = new Loot(lootName, URL, points);
 
-        if (levelPos > 0 && levelPos < LEVELS_SIZE) {
-            for (int i = 0; i < ammountOfLoots; i++) {
-                msg += levels[levelPos - 1].addLoot(loot) + "\n";
-            }
+        for (int i = 0; i < ammountOfLoots; i++) {
+            msg += this.levels[levelPos - 1].addLoot(newLoot) + "\n";
         }
 
         return msg;
@@ -53,33 +51,34 @@ public class Game {
      * @param enemy    The enemy to be added
      * @return A message confirming the operation
      */
-    public String addEnemyToALevel(int levelPos, Enemy enemy) {
+    public String addEnemyToALevel(int levelPos, String enemyName, String type, double pointsGiven, double pointsTaken) {
         String msg = "No se ha podido encontrar el nivel";
 
-        if (levelPos > 0 && levelPos < LEVELS_SIZE) {
-            msg = levels[levelPos - 1].addEnemy(enemy);
-        }
+        Enemy newEnemy = new Enemy(enemyName, type, pointsGiven, pointsTaken);
+
+        msg = this.levels[levelPos - 1].addEnemy(newEnemy);
 
         return msg;
     }
 
     /**
      * This function returns a String from a selected position given by the user
+     * 
      * @param levelPos number of the level that the user wants to access
      * @return A String with the information of the level
      */
     public String reportEnemiesAndLootsOfLevel(int levelPos) {
         String msg = "";
 
-        msg = levels[levelPos].toString() + "\n";
+        msg = this.levels[levelPos - 1].toString() + "\n";
 
-        for (int j = 0; j < levels[levelPos].getEnemies().length; j++) {
-            if (levels[levelPos].getEnemies()[j] != null) {
-                msg += levels[levelPos].getEnemies()[j].toString() + "\n";
+        for (int j = 0; j < this.levels[levelPos - 1].getEnemies().length; j++) {
+            if (this.levels[levelPos - 1].getEnemies()[j] != null) {
+                msg += this.levels[levelPos - 1].getEnemies()[j].toString() + "\n";
             }
 
-            if (levels[levelPos].getLoots()[j] != null) {
-                msg += levels[levelPos].getLoots()[j].toString() + "\n";
+            if (this.levels[levelPos - 1].getLoots()[j] != null) {
+                msg += this.levels[levelPos - 1].getLoots()[j].toString() + "\n";
             }
         }
 
