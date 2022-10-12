@@ -33,20 +33,32 @@ public class Game {
      * @param loot Loot the user wants to be added
      * @return message confirming the operation
      */
-    public String addLootToALevel(int levelPos, Loot loot) {
+    public String addLootToALevel(int levelPos, Loot loot, int ammountOfLoots) {
         String msg = "No se ha podido encontrar el nivel";
 
         if (levelPos > 0 && levelPos < LEVELS_SIZE) {
-            msg = levels[levelPos].addLoot(loot);
+            for (int i = 0; i < ammountOfLoots - 1; i++) {
+                msg += levels[levelPos].addLoot(loot) + "\n";
+
+            }
         }
 
         return msg;
     }
 
-    //Thinking if I will have to create an array here and copy from it
-    public String mostRepeatedTreasure() {
-        String msg = "";
+    /**
+     * This function adds an Enemy to a level given by the user
+     * @param levelPos The id of the level in which the enemy is going to be added
+     * @param enemy The enemy to be added
+     * @return A message confirming the operation
+     */
+    public String addEnemyToALevel(int levelPos, Enemy enemy) {
+        String msg = "No se ha podido encontrar el nivel";
 
+        if (levelPos > 0 && levelPos < LEVELS_SIZE) {
+            msg = levels[levelPos].addEnemy(enemy);
+        }
+        
         return msg;
     }
 }
