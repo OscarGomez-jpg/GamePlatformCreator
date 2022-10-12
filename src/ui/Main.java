@@ -124,6 +124,11 @@ public class Main {
         return msg;
     }
 
+    /**
+     * This function adds an enemy to a specific level
+     * 
+     * @return String confirming the operation
+     */
     public String uiAddEnemyToALevel() {
         String msg = "No se ha podido añadir el enemigo";
 
@@ -136,10 +141,10 @@ public class Main {
             String enemyName = reader.next();
 
             System.out.println("Ingrese el nombre del tipo de enemigo que desea agregar: ");
-            System.out.println("1. Ogro\n" +
-                    "2. Abstracto\n" +
-                    "3. Magico\n" +
-                    "4. Jefe");
+            System.out.println("Ogro\n" +
+                    "Abstracto\n" +
+                    "Magico\n" +
+                    "Jefe");
             String type = reader.next();
 
             System.out.println("Ingrese los puntos que dara el enemigo: ");

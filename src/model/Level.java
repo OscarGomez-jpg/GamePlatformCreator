@@ -17,6 +17,7 @@ public class Level {
         this.amountOfLoot = amountOfLoot;
 
         this.loots = new Loot[AMOUNT_LOOTS];
+        this.enemies = new Enemy[AMOUNT_ENEMIES];
     }
 
     /**
@@ -27,7 +28,6 @@ public class Level {
     public String addLoot(Loot loot) {
         String msg = "No se ha podido añadir el loot";
         boolean isEmpty = true;
-
         for (int i = 0; i < AMOUNT_LOOTS && isEmpty == true; i++) {
             if (loots[i] == null) {
                 loots[i] = loot;
@@ -51,7 +51,7 @@ public class Level {
         for (int i = 0; i < AMOUNT_ENEMIES && isEmpty == true; i++) {
             if (enemies[i] == null) {
                 enemies[i] = enemy;
-                msg = "Tesoro agregado con exito";
+                msg = "Enemigo agregado";
                 isEmpty = false;
             }
         }
