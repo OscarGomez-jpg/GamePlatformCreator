@@ -54,6 +54,7 @@ public class Main {
         System.out.println(
                 "1. Agregar un tesoro a un nivel\n" +
                         "2. Agregar un enemigo a un nivel\n" +
+                        "3. Mostrar los tesoros y enemigos de un nivel\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -74,6 +75,12 @@ public class Main {
 
             case 2: {
                 msg = uiAddEnemyToALevel();
+
+                System.out.println(msg);
+            }
+
+            case 3: {
+                msg = uiReportEnemiesAndLootsOfLevel();
 
                 System.out.println(msg);
             }
@@ -135,7 +142,7 @@ public class Main {
         try {
 
             System.out.println("Ingrese el nivel al que quiere agregar el enemigo: ");
-            int levelId = reader.nextInt();
+            int levelId = reader.nextInt() - 1;
 
             System.out.println("Ingrese el nombre del enemigo que quiere agregar: ");
             String enemyName = reader.next();
@@ -164,4 +171,24 @@ public class Main {
         return msg;
     }
 
+    /**
+     * This function shows the loot and enemies of a level
+     * 
+     * @return String with the formated data
+     */
+    public String uiReportEnemiesAndLootsOfLevel() {
+        String msg = "";
+
+        try {
+            System.out.println("Ingrese el valor del nivel del que quiere saber los enemigos y niveles");
+            int levelPos = reader.nextInt();
+
+            msg = game.reportEnemiesAndLootsOfLevel(levelPos);
+
+        } catch (Exception inputMismException) {
+            msg = "Por favor ingrese un numero valido";
+        }
+
+        return msg;
+    }
 }

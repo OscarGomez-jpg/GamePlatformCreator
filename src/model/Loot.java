@@ -1,4 +1,5 @@
 package model;
+
 import java.util.Random;
 
 public class Loot {
@@ -40,5 +41,10 @@ public class Loot {
 
     public void setURL(String uRL) {
         URL = uRL;
+    }
+
+    public String toString() {
+        return "Loot :\n" +
+                "[name=" + name + ", URL=" + URL + ", points=" + points + ", posX=" + posX + ", posY=" + posY + "]";
     }
 }

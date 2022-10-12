@@ -7,6 +7,8 @@ public class Level {
     private String id;
     private int amountOfEnemies;
     private int amountOfLoot;
+    private int totalEnemies;
+    private int totalLoots;
 
     private Loot[] loots;
     private Enemy[] enemies;
@@ -32,6 +34,7 @@ public class Level {
             if (loots[i] == null) {
                 loots[i] = loot;
                 msg = "Tesoro agregado con exito";
+                this.totalLoots += 1;
                 isEmpty = false;
             }
         }
@@ -52,6 +55,7 @@ public class Level {
             if (enemies[i] == null) {
                 enemies[i] = enemy;
                 msg = "Enemigo agregado";
+                this.totalEnemies += 1;
                 isEmpty = false;
             }
         }
@@ -68,5 +72,19 @@ public class Level {
         }
 
         return acu;
+    }
+
+    public Loot[] getLoots() {
+        return loots;
+    }
+
+    public Enemy[] getEnemies() {
+        return enemies;
+    }
+
+    @Override
+    public String toString() {
+        return "Level: \n" + "[id=" + id + ", amountOfEnemies=" + amountOfEnemies + ", amountOfLoot=" + amountOfLoot
+                + ", totalEnemies=" + totalEnemies + ", totalLoots=" + totalLoots + "]";
     }
 }

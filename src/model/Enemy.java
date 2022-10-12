@@ -67,7 +67,10 @@ public class Enemy {
         this.pointsTaken = pointsTaken;
     }
 
-    public Random getRandom() {
-        return random;
+    public String toString() {
+        return "Enemy:\n" + "[name=" + name + ", type=" + type + ", pointsGiven=" + pointsGiven + ", pointsTaken="
+                + pointsTaken + ", posX=" + posX + ", posY=" + posY + "]";
     }
+
+    
 }

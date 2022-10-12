@@ -4,12 +4,12 @@ public class Game {
     public final static int LEVELS_SIZE = 10;
     private Level[] levels;
 
-    public Game () {
+    public Game() {
         levels = new Level[LEVELS_SIZE];
 
         generateInitialLevels();
     }
-    
+
     /**
      * This function creates the 10 levels that the game use
      */
@@ -29,8 +29,9 @@ public class Game {
 
     /**
      * This function adds a loot to an especific level
+     * 
      * @param levelPos position in which the loot is going to be added
-     * @param loot Loot the user wants to be added
+     * @param loot     Loot the user wants to be added
      * @return message confirming the operation
      */
     public String addLootToALevel(int levelPos, Loot loot, int ammountOfLoots) {
@@ -47,8 +48,9 @@ public class Game {
 
     /**
      * This function adds an Enemy to a level given by the user
+     * 
      * @param levelPos The id of the level in which the enemy is going to be added
-     * @param enemy The enemy to be added
+     * @param enemy    The enemy to be added
      * @return A message confirming the operation
      */
     public String addEnemyToALevel(int levelPos, Enemy enemy) {
@@ -57,7 +59,30 @@ public class Game {
         if (levelPos > 0 && levelPos < LEVELS_SIZE) {
             msg = levels[levelPos - 1].addEnemy(enemy);
         }
-        
+
+        return msg;
+    }
+
+    /**
+     * This function returns a String from a selected position given by the user
+     * @param levelPos number of the level that the user wants to access
+     * @return A String with the information of the level
+     */
+    public String reportEnemiesAndLootsOfLevel(int levelPos) {
+        String msg = "";
+
+        msg = levels[levelPos].toString() + "\n";
+
+        for (int j = 0; j < levels[levelPos].getEnemies().length; j++) {
+            if (levels[levelPos].getEnemies()[j] != null) {
+                msg += levels[levelPos].getEnemies()[j].toString() + "\n";
+            }
+
+            if (levels[levelPos].getLoots()[j] != null) {
+                msg += levels[levelPos].getLoots()[j].toString() + "\n";
+            }
+        }
+
         return msg;
     }
 }
