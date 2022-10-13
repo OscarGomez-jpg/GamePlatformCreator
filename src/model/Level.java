@@ -92,6 +92,36 @@ public class Level {
         return pos;
     }
 
+    public int searchLootByName(String lootName) {
+        int pos = -1;
+        boolean isFound = false;
+
+        for (int i = 0; i < AMOUNT_LOOTS && !isFound; i++) {
+            if (loots[i] != null && loots[i].getName().equals(lootName)) {
+                pos = i;
+                isFound = true;
+            }
+        }
+
+        return pos;
+    }
+
+    public int countLootByName(String lootName) {
+        int acu = -1;
+        int pos = searchLootByName(lootName);
+        
+        if (pos != -1) {
+            acu = 0;
+            for (int i = pos; i < AMOUNT_LOOTS; i++) {
+                if (loots[i] != null && loots[i].getName().equals(lootName)) {
+                    acu += 1;
+                }
+            }
+        }
+
+        return acu;
+    }
+    
     public Loot[] getLoots() {
         return loots;
     }

@@ -1,8 +1,6 @@
 package ui;
 
-import model.Enemy;
 import model.Game;
-import model.Loot;
 
 import java.util.Scanner;
 
@@ -53,6 +51,7 @@ public class Main {
                 "1. Agregar un tesoro a un nivel\n" +
                         "2. Agregar un enemigo a un nivel\n" +
                         "3. Mostrar los tesoros y enemigos de un nivel\n" +
+                        "4. Cantidad de un tesoro en todos los niveles\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -87,6 +86,11 @@ public class Main {
 
                 System.out.println(msg);
 
+                break;
+            }
+
+            case 4: {
+                
                 break;
             }
 
