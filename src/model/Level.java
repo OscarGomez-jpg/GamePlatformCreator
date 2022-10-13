@@ -92,6 +92,15 @@ public class Level {
         return pos;
     }
 
+    /**
+     * This function will search the name of a loot, if the name is not found will
+     * return a -1
+     * otherwise, will return the position of the object with that name
+     * 
+     * @param lootName String with the name that is going to be searched
+     * @return an int -1 if the name is not found otherwise will be the position of
+     *         the enemy in the array
+     */
     public int searchLootByName(String lootName) {
         int pos = -1;
         boolean isFound = false;
@@ -106,10 +115,18 @@ public class Level {
         return pos;
     }
 
+    /**
+     * This function will count the loots with the same name in the level.
+     * Will start in the first position where it finds the first loot with the same
+     * name
+     * 
+     * @param lootName Name that is going to be counted
+     * @return an int with the loots with the same name
+     */
     public int countLootByName(String lootName) {
-        int acu = -1;
+        int acu = 0;
         int pos = searchLootByName(lootName);
-        
+
         if (pos != -1) {
             acu = 0;
             for (int i = pos; i < AMOUNT_LOOTS; i++) {
@@ -121,7 +138,7 @@ public class Level {
 
         return acu;
     }
-    
+
     public Loot[] getLoots() {
         return loots;
     }

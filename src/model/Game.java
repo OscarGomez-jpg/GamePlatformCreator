@@ -102,4 +102,24 @@ public class Game {
 
         return msg;
     }
+
+    /**
+     * This function counts all the loot that corresponds to the lootName given by
+     * the user in all levels
+     * 
+     * @param lootName The name of the loot that is going to be counted
+     * @return
+     */
+    public String countLootAllLevels(String lootName) {
+        String msg = "";
+        int acu = 0;
+
+        for (int i = 0; i < LEVELS_SIZE; i++) {
+            acu += this.levels[i].countLootByName(lootName);
+        }
+
+        msg = "La cantidad de " + lootName + " en todos los niveles es: " + acu + "\n";
+
+        return msg;
+    }
 }

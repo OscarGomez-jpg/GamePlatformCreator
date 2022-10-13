@@ -52,6 +52,7 @@ public class Main {
                         "2. Agregar un enemigo a un nivel\n" +
                         "3. Mostrar los tesoros y enemigos de un nivel\n" +
                         "4. Cantidad de un tesoro en todos los niveles\n" +
+                        "5. Mostrar la cantidad de un loot en todos los niveles\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -63,8 +64,8 @@ public class Main {
         String msg = "";
 
         switch (option) {
-            //Add loot to a level
             case 1: {
+                // Add loot to a level
                 msg = uiAddLootToALevel();
 
                 System.out.println(msg);
@@ -72,16 +73,16 @@ public class Main {
             }
 
             case 2: {
-            //Add enemy to a level
+                // Add enemy to a level
                 msg = uiAddEnemyToALevel();
 
                 System.out.println(msg);
-                
+
                 break;
             }
 
             case 3: {
-            //Show loots and enemies from a level
+                // Show loots and enemies from a level
                 msg = uiReportEnemiesAndLootsOfLevel();
 
                 System.out.println(msg);
@@ -90,7 +91,11 @@ public class Main {
             }
 
             case 4: {
-                
+                //Count loot in all levels by name
+                msg = uiCountLootAllLevels();
+
+                System.out.println(msg);
+
                 break;
             }
 
@@ -134,8 +139,7 @@ public class Main {
 
         } catch (Exception inputMismatchException) {
             msg = "Por favor introduce un valor valido";
-        }     
-        
+        }
 
         return msg;
     }
@@ -195,6 +199,22 @@ public class Main {
         } catch (Exception inputMismException) {
             msg = "Por favor ingrese un numero valido";
         }
+
+        return msg;
+    }
+
+    /**
+     * This function will count the ocurrences of a loot name given by the user
+     * 
+     * @return String with the amount of the loot found in all levels
+     */
+    public String uiCountLootAllLevels() {
+        String msg = "";
+
+        System.out.println("Ingrese el nombre del tesoro que quiere contar: ");
+        String lootName = reader.next();
+
+        msg = game.countLootAllLevels(lootName);
 
         return msg;
     }
