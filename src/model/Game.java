@@ -63,6 +63,13 @@ public class Game {
             double pointsTaken) {
         String msg = "No se ha podido encontrar el nivel";
 
+        int check = this.levels[levelPos].searchEnemyByName(enemyName);
+
+        if (check != -1) {
+            msg = "Este enemigo ya se encuentra en este nivel, intente con un nombre distinto";
+            return msg;
+        }
+
         Enemy newEnemy = new Enemy(enemyName, type, pointsGiven, pointsTaken);
 
         if (levelPos > 0 && levelPos <= LEVELS_SIZE) {

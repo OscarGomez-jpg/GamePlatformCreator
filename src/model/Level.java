@@ -69,6 +69,29 @@ public class Level {
         return msg;
     }
 
+    /**
+     * This function will search the name of an enemy, if the name is not found will
+     * return a -1
+     * otherwise, will return the position of the object with that name
+     * 
+     * @param enemyName String with the name that is going to be searched
+     * @return a -1 if the name is not found otherwise will be the position of the
+     *         enemy in the array
+     */
+    public int searchEnemyByName(String enemyName) {
+        int pos = -1;
+        boolean isFound = false;
+
+        for (int i = 0; i < AMOUNT_ENEMIES && !isFound; i++) {
+            if (enemies[i] != null && enemies[i].getName().equals(enemyName)) {
+                pos = i;
+                isFound = true;
+            }
+        }
+
+        return pos;
+    }
+
     public Loot[] getLoots() {
         return loots;
     }
