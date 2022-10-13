@@ -64,6 +64,7 @@ public class Main {
         String msg = "";
 
         switch (option) {
+            //Add loot to a level
             case 1: {
                 msg = uiAddLootToALevel();
 
@@ -72,6 +73,7 @@ public class Main {
             }
 
             case 2: {
+            //Add enemy to a level
                 msg = uiAddEnemyToALevel();
 
                 System.out.println(msg);
@@ -80,6 +82,7 @@ public class Main {
             }
 
             case 3: {
+            //Show loots and enemies from a level
                 msg = uiReportEnemiesAndLootsOfLevel();
 
                 System.out.println(msg);
@@ -107,7 +110,7 @@ public class Main {
     public String uiAddLootToALevel() {
         String msg = "No se ha podido añadir el tesoro";
 
-        
+        try {
             System.out.println("Ingrese el nivel al que quiere agregar el tesoro: ");
             int levelId = reader.nextInt();
 
@@ -124,6 +127,10 @@ public class Main {
             int amount = reader.nextInt();
 
             msg = game.addLootToALevel(levelId, lootName, URL, points, amount);
+
+        } catch (Exception inputMismatchException) {
+            msg = "Por favor introduce un valor valido";
+        }     
         
 
         return msg;
@@ -161,7 +168,7 @@ public class Main {
             msg = game.addEnemyToALevel(levelId, enemyName, type, pointsGiven, pointsTaken);
 
         } catch (Exception inputMismatchException) {
-            msg = "Por favor introduce un número";
+            msg = "Por favor un valor valido";
         }
 
         return msg;

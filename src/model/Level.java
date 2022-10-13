@@ -9,6 +9,8 @@ public class Level {
     private int amountOfLoot;
     private int totalEnemies;
     private int totalLoots;
+    private int totalPointsGiven;
+    private int totalPointsTaken;
 
     private Loot[] loots;
     private Enemy[] enemies;
@@ -17,6 +19,8 @@ public class Level {
         this.id = id;
         this.amountOfEnemies = amountOfEnemies;
         this.amountOfLoot = amountOfLoot;
+        this.totalPointsGiven = 0;
+        this.totalPointsTaken = 0;
 
         this.loots = new Loot[AMOUNT_LOOTS];
         this.enemies = new Enemy[AMOUNT_ENEMIES];
@@ -63,17 +67,6 @@ public class Level {
         }
 
         return msg;
-    }
-
-    public int countLootByName(String lootName) {
-        int acu = 0;
-        for (int i = 0; i < AMOUNT_LOOTS; i++) {
-            if (loots[i].getName().equals(lootName)) {
-                acu += 1;
-            }
-        }
-
-        return acu;
     }
 
     public Loot[] getLoots() {
