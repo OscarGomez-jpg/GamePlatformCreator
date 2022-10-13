@@ -52,7 +52,6 @@ public class Main {
                         "2. Agregar un enemigo a un nivel\n" +
                         "3. Mostrar los tesoros y enemigos de un nivel\n" +
                         "4. Cantidad de un tesoro en todos los niveles\n" +
-                        "5. Mostrar la cantidad de un loot en todos los niveles\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
