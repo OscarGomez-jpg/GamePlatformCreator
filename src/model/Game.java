@@ -1,15 +1,17 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Game {
     public final static int LEVELS_SIZE = 10;
-    private ArrayList <String> enemyNames;
-    private ArrayList <String> lootNames;
     private Level[] levels;
+    private Map<String, Integer> lootNames;
 
     public Game() {
         this.levels = new Level[LEVELS_SIZE];
+        this.lootNames = new HashMap<String, Integer>();
 
         generateInitialLevels();
     }
@@ -42,10 +44,11 @@ public class Game {
      */
     public String addLootToALevel(int levelPos, String lootName, String URL, double points, int ammountOfLoots) {
         String msg = "";
-        Loot newLoot = new Loot(lootName, URL, points);
 
         if (levelPos > 0 && levelPos <= LEVELS_SIZE) {
+            Loot newLoot = new Loot(lootName, URL, points);
             for (int i = 0; i < ammountOfLoots; i++) {
+                takeAllLootsName(lootName);
                 msg += this.levels[levelPos - 1].addLoot(newLoot) + "\n";
             }
         }
@@ -127,8 +130,28 @@ public class Game {
         return msg;
     }
 
+    public void takeAllLootsName(String name) {
+        if (this.lootNames.containsKey(name)) {
+            this.lootNames.put(name, this.lootNames.get(name) + 1);
+        } else {
+            this.lootNames.put(name, 1);
+        }
+    }
+
     public String mostRepeatedLootAllLevels() {
         String msg = "";
+        int bigger = 0;
+
+        Iterator<String> it = lootNames.keySet().iterator();
+
+        while (it.hasNext()) {
+            String key = it.next();
+
+            if (bigger < lootNames.get(key)) {
+                bigger = lootNames.get(key);
+            }
+        }
+
         return msg;
     }
 }

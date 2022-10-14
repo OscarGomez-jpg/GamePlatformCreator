@@ -52,6 +52,7 @@ public class Main {
                         "2. Agregar un enemigo a un nivel\n" +
                         "3. Mostrar los tesoros y enemigos de un nivel\n" +
                         "4. Cantidad de un tesoro en todos los niveles\n" +
+                        "5. Ver el tesoro que mas se repite\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -98,6 +99,17 @@ public class Main {
                 break;
             }
 
+            case 5: {
+                //Most repeated loot
+                msg = uiMostRepeatedLootAllLevels();
+
+                System.out.println(msg);
+
+                uiMostRepeatedLootAllLevels();
+
+                break;
+            }
+            
             case 0: {
                 System.out.println("Hasta luego!");
                 break;
@@ -214,6 +226,14 @@ public class Main {
         String lootName = reader.next();
 
         msg = game.countLootAllLevels(lootName);
+
+        return msg;
+    }
+
+    public String uiMostRepeatedLootAllLevels() {
+        String msg = "";
+
+        msg = game.mostRepeatedLootAllLevels();
 
         return msg;
     }
