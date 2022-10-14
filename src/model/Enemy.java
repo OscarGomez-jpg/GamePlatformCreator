@@ -68,9 +68,12 @@ public class Enemy {
     }
 
     public String toString() {
-        return "Enemy:\n" + "[name=" + name + ", type=" + type + ", pointsGiven=" + pointsGiven + ", pointsTaken="
-                + pointsTaken + ", posX=" + posX + ", posY=" + posY + "]";
+        return "Enemy: " + name + "\n" +
+                "   Tipo=" + type + "\n" +
+                "   Puntos que da=" + pointsGiven + "\n" +
+                "   Puntos que quita=" + pointsTaken + "\n" +
+                "   Posicion X=" + posX + "\n" +
+                "   posicion Y=" + posY + "\n";
     }
 
-    
 }

@@ -44,7 +44,10 @@ public class Loot {
     }
 
     public String toString() {
-        return "Loot :\n" +
-                "[name=" + name + ", URL=" + URL + ", points=" + points + ", posX=" + posX + ", posY=" + posY + "]";
+        return "Tesoro :" + name + "\n" +
+                "   URL=" + URL + "\n" +
+                "   Puntos=" + points + "\n" +
+                "   Posicion X=" + posX + "\n" +
+                "   Posicion Y=" + posY + "\n";
     }
 }

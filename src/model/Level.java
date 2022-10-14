@@ -5,6 +5,7 @@ public class Level {
     public static final int AMOUNT_ENEMIES = 25;
 
     private String id;
+    private difficultyLevel difficulty;
     private int amountOfEnemies;
     private int amountOfLoot;
     private int totalEnemies;
@@ -62,6 +63,9 @@ public class Level {
                 enemies[i] = enemy;
                 msg = "Enemigo agregado";
                 this.totalEnemies += 1;
+                this.totalPointsGiven += enemy.getPointsGiven();
+                this.totalPointsTaken += enemy.getPointsTaken();
+                setDifficulty();
                 isEmpty = false;
             }
         }
@@ -139,6 +143,18 @@ public class Level {
         return acu;
     }
 
+    public void setDifficulty() {
+        double ans = this.totalPointsGiven / this.totalPointsTaken;
+
+        if (ans < 0) {
+            this.difficulty = difficultyLevel.HIGH;
+        } else if (ans == 1) {
+            this.difficulty = difficultyLevel.MEDIUM;
+        } else {
+            this.difficulty = difficultyLevel.LOW;
+        }
+    }
+ 
     public Loot[] getLoots() {
         return loots;
     }
@@ -148,7 +164,11 @@ public class Level {
     }
 
     public String toString() {
-        return "Level: \n" + "[id=" + id + ", amountOfEnemies=" + amountOfEnemies + ", amountOfLoot=" + amountOfLoot
-                + ", totalEnemies=" + totalEnemies + ", totalLoots=" + totalLoots + "]";
+        return "Nivel:" + id + "\n" +
+                            "   Cantidad enemigos permitidos=" + amountOfEnemies + "\n" +
+                            "   Cantidad de tesoros permitidos=" + amountOfLoot + "\n" +
+                            "   Total de enemigos=" + totalEnemies + "\n" +
+                            "   Total de tesoros=" + totalLoots + "\n" +
+                            "   Dificultad=" + difficulty + "\n";
     }
 }

@@ -90,7 +90,7 @@ public class Main {
             }
 
             case 4: {
-                //Count loot in all levels by name
+                // Count loot in all levels by name
                 msg = uiCountLootAllLevels();
 
                 System.out.println(msg);

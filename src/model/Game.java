@@ -1,7 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Game {
     public final static int LEVELS_SIZE = 10;
+    private ArrayList <String> enemyNames;
+    private ArrayList <String> lootNames;
     private Level[] levels;
 
     public Game() {
@@ -120,6 +124,11 @@ public class Game {
 
         msg = "La cantidad de " + lootName + " en todos los niveles es: " + acu + "\n";
 
+        return msg;
+    }
+
+    public String mostRepeatedLootAllLevels() {
+        String msg = "";
         return msg;
     }
 }
