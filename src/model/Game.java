@@ -130,27 +130,43 @@ public class Game {
         return msg;
     }
 
+    /**
+     * This function will use the name of the loots added as a key in a Hashmap
+     * then the value in eack key will be used as an acumulator
+     * 
+     * @param name The name that will work as key
+     */
     public void takeAllLootsName(String name) {
         if (this.lootNames.containsKey(name)) {
             this.lootNames.put(name, this.lootNames.get(name) + 1);
         } else {
             this.lootNames.put(name, 1);
         }
+
     }
 
+    /**
+     * This function will iterate through the loot names and returns a message with the most repeated
+     * treasure through all levels
+     * 
+     * @return A String with the most repeated treasure through all levels
+     */
     public String mostRepeatedLootAllLevels() {
         String msg = "";
+        String keyMsg = "";
         int bigger = 0;
 
         Iterator<String> it = lootNames.keySet().iterator();
 
         while (it.hasNext()) {
             String key = it.next();
-
             if (bigger < lootNames.get(key)) {
                 bigger = lootNames.get(key);
+                keyMsg = key;
             }
         }
+
+        msg = "El tesoro que mas se repite es: '" + keyMsg + "' con un total de: " + bigger;
 
         return msg;
     }

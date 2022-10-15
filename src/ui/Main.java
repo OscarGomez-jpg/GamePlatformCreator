@@ -105,8 +105,6 @@ public class Main {
 
                 System.out.println(msg);
 
-                uiMostRepeatedLootAllLevels();
-
                 break;
             }
             
