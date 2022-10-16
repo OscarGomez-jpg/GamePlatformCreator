@@ -53,6 +53,7 @@ public class Main {
                         "3. Mostrar los tesoros y enemigos de un nivel\n" +
                         "4. Cantidad de un tesoro en todos los niveles\n" +
                         "5. Ver el tesoro que mas se repite\n" +
+                        "6. Ver la cantidad de un tipo de enemigo en todos los niveles\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -108,6 +109,16 @@ public class Main {
                 break;
             }
             
+            case 6: {
+                //Most repeated enemy type in all levels
+
+                msg = uiMostReapeatedEnemyTypeAllLevels();
+
+                System.out.println(msg);
+
+                break;
+            }
+
             case 0: {
                 System.out.println("Hasta luego!");
                 break;
@@ -185,7 +196,7 @@ public class Main {
             msg = game.addEnemyToALevel(levelId, enemyName, type, pointsGiven, pointsTaken);
 
         } catch (Exception inputMismatchException) {
-            msg = "Por favor un valor valido";
+            msg = "Por favor ingrese un valor valido";
         }
 
         return msg;
@@ -213,7 +224,7 @@ public class Main {
     }
 
     /**
-     * This function will count the ocurrences of a loot name given by the user
+     * This function shows the count the ocurrences of a loot name given by the user
      * 
      * @return String with the amount of the loot found in all levels
      */
@@ -228,10 +239,28 @@ public class Main {
         return msg;
     }
 
+    /**
+     * This function shows the most repeated loot through al levels
+     * 
+     * @return String with the most repeated loot in all levels
+     */
     public String uiMostRepeatedLootAllLevels() {
         String msg = "";
 
         msg = game.mostRepeatedLootAllLevels();
+
+        return msg;
+    }
+
+    public String uiMostReapeatedEnemyTypeAllLevels() {
+        String msg = "";
+
+        System.out.println("Ingrese el tipo de enemigo que desea contar: ");
+        System.out.println("* Ogro\n" + "* Magico\n" + "Abstracto\n" + "Jefe\n");
+        String type = reader.next();
+        type = type.toLowerCase();
+
+        msg = game.typeInAllLevels(type);
 
         return msg;
     }

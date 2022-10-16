@@ -163,6 +163,7 @@ public class Level {
         return enemies;
     }
 
+    @Override
     public String toString() {
         return "Nivel:" + id + "\n" +
                             "   Cantidad enemigos permitidos=" + amountOfEnemies + "\n" +

@@ -25,8 +25,10 @@ public class Enemy {
         return name;
     }
 
-    public typeEnemy getType() {
-        return type;
+    public String getType() {
+        String msg = "";
+        msg += type;
+        return msg;
     }
 
     public double getPointsGiven() {
@@ -67,6 +69,7 @@ public class Enemy {
         this.pointsTaken = pointsTaken;
     }
 
+    @Override
     public String toString() {
         return "Enemy: " + name + "\n" +
                 "   Tipo=" + type + "\n" +

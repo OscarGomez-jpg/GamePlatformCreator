@@ -8,10 +8,12 @@ public class Game {
     public final static int LEVELS_SIZE = 10;
     private Level[] levels;
     private Map<String, Integer> lootNames;
+    private Map<String, Integer> typeEnemies;
 
     public Game() {
         this.levels = new Level[LEVELS_SIZE];
         this.lootNames = new HashMap<String, Integer>();
+        this.typeEnemies = new HashMap<String, Integer>();
 
         generateInitialLevels();
     }
@@ -78,6 +80,8 @@ public class Game {
         }
 
         Enemy newEnemy = new Enemy(enemyName, type, pointsGiven, pointsTaken);
+
+        takeAllEnemiesType(newEnemy.getType());
 
         if (levelPos > 0 && levelPos <= LEVELS_SIZE) {
             msg = this.levels[levelPos - 1].addEnemy(newEnemy);
@@ -167,6 +171,28 @@ public class Game {
         }
 
         msg = "El tesoro que mas se repite es: '" + keyMsg + "' con un total de: " + bigger;
+
+        return msg;
+    }
+
+    public void takeAllEnemiesType(String type) {
+        if (typeEnemies.get(type) != 0) {
+            this.typeEnemies.put(type, typeEnemies.get(type) + 1);
+        } else {
+            this.typeEnemies.put(type, 1);
+        }
+    }
+
+    public String typeInAllLevels(String type) {
+        String msg = "";
+
+        if (typeEnemies.get(type) == null) {
+            return "Ese tipo de enemigo no existe";
+        }
+
+        int total = typeEnemies.get(type);
+
+        msg = "La cantidad de " + type + " en todos los niveles es: " + total;
 
         return msg;
     }

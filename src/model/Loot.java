@@ -43,6 +43,7 @@ public class Loot {
         URL = uRL;
     }
 
+    @Override
     public String toString() {
         return "Tesoro :" + name + "\n" +
                 "   URL=" + URL + "\n" +
