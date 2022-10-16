@@ -1,5 +1,5 @@
 package model;
 
 enum typeEnemy {
-    Ogre, Abstract, Magical, Boss;
+    Ogro, Abstracto, Magico, Jefe;
 }

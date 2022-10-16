@@ -27,7 +27,8 @@ public class Enemy {
 
     public String getType() {
         String msg = "";
-        msg += type;
+        msg = this.type.name();
+        msg = msg.toLowerCase();
         return msg;
     }
 
@@ -51,13 +52,17 @@ public class Enemy {
         name = name.toLowerCase();
         switch (name) {
             case "ogro":
-                this.type = typeEnemy.Ogre;
+                this.type = typeEnemy.Ogro;
+                break;
             case "abstracto":
-                this.type = typeEnemy.Abstract;
+                this.type = typeEnemy.Abstracto;
+                break;
             case "magico":
-                this.type = typeEnemy.Magical;
+                this.type = typeEnemy.Magico;
+                break;
             case "jefe":
-                this.type = typeEnemy.Boss;
+                this.type = typeEnemy.Jefe;
+                break;
         }
     }
 

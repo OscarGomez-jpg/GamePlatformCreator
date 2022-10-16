@@ -72,18 +72,18 @@ public class Game {
             double pointsTaken) {
         String msg = "No se ha podido encontrar el nivel";
 
-        int check = this.levels[levelPos].searchEnemyByName(enemyName);
-
-        if (check != -1) {
-            msg = "Este enemigo ya se encuentra en este nivel, intente con un nombre distinto";
-            return msg;
-        }
-
-        Enemy newEnemy = new Enemy(enemyName, type, pointsGiven, pointsTaken);
-
-        takeAllEnemiesType(newEnemy.getType());
-
         if (levelPos > 0 && levelPos <= LEVELS_SIZE) {
+            int check = this.levels[levelPos - 1].searchEnemyByName(enemyName);
+
+            if (check != -1) {
+                msg = "Este enemigo ya se encuentra en este nivel, intente con un nombre distinto";
+                return msg;
+            }
+
+            Enemy newEnemy = new Enemy(enemyName, type, pointsGiven, pointsTaken);
+
+            takeAllEnemiesType(newEnemy.getType());
+
             msg = this.levels[levelPos - 1].addEnemy(newEnemy);
         }
 
@@ -176,7 +176,7 @@ public class Game {
     }
 
     public void takeAllEnemiesType(String type) {
-        if (typeEnemies.get(type) != 0) {
+        if (typeEnemies.get(type) != null) {
             this.typeEnemies.put(type, typeEnemies.get(type) + 1);
         } else {
             this.typeEnemies.put(type, 1);
@@ -185,6 +185,8 @@ public class Game {
 
     public String typeInAllLevels(String type) {
         String msg = "";
+
+        type = type.toLowerCase();
 
         if (typeEnemies.get(type) == null) {
             return "Ese tipo de enemigo no existe";

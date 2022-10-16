@@ -256,7 +256,7 @@ public class Main {
         String msg = "";
 
         System.out.println("Ingrese el tipo de enemigo que desea contar: ");
-        System.out.println("* Ogro\n" + "* Magico\n" + "Abstracto\n" + "Jefe\n");
+        System.out.println("* Ogro\n" + "* Magico\n" + "* Abstracto\n" + "* Jefe\n");
         String type = reader.next();
         type = type.toLowerCase();
 
