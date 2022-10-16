@@ -175,6 +175,12 @@ public class Game {
         return msg;
     }
 
+    /**
+     * This function takes a String that represents the enemy type from the enmy that was
+     * added to the game. Uses a HashMap to store the amount of an enemy type in the game
+     * 
+     * @param type A String containing the enemy type that was added to a level
+     */
     public void takeAllEnemiesType(String type) {
         if (typeEnemies.get(type) != null) {
             this.typeEnemies.put(type, typeEnemies.get(type) + 1);
@@ -183,6 +189,12 @@ public class Game {
         }
     }
 
+    /**
+     * This function will return a String with amount of an enemy type
+     * 
+     * @param type The enemy type that is needed
+     * @return a String with the amount of that enemy type in all levels
+     */
     public String typeInAllLevels(String type) {
         String msg = "";
 

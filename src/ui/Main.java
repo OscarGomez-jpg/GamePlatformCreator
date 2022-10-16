@@ -252,6 +252,12 @@ public class Main {
         return msg;
     }
 
+    /**
+     * This function get an enemy type given by the user and return a String 
+     * with how many times that type appears in all levels
+     * 
+     * @return a String with the occurences of the enemy type
+     */
     public String uiMostReapeatedEnemyTypeAllLevels() {
         String msg = "";
 
