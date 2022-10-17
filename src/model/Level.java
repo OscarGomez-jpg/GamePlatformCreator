@@ -80,7 +80,7 @@ public class Level {
     /**
      * This functions adds a player to the level
      * @param player Th player that is going to be added
-     * @return
+     * @return A String confirming the operation
      */
     public String addPlayer(Player player) {
         String msg = "";

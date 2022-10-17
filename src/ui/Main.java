@@ -71,6 +71,7 @@ public class Main {
                         "8. Incrementar el puntaje de un jugador\n" +
                         "9. Mostrar el enemigo con mas puntaje\n" +
                         "10. Mostrar los jugadores con mas puntaje\n" +
+                        "11. Consonantes de el nombre de un enemigo\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -168,6 +169,14 @@ public class Main {
                 //Top 5 players
                 
                 msg = uiPlayersWithHighestScore();
+
+                System.out.println(msg);
+            }
+
+            case 11: {
+                //Consonants in a name
+
+                msg = uiConsonats();
 
                 System.out.println(msg);
             }
@@ -417,6 +426,20 @@ public class Main {
         String msg = "";
 
         msg = game.playersWithHighestScore();
+
+        return msg;
+    }
+
+    /**
+     * This function returns the consonants of an Enemy name
+     * 
+     * @return String with the total consonants
+     */
+    public String uiConsonats() {
+        System.out.println("Ingrese el nombre del enemigo: ");
+        String enemyName = reader.next();
+
+        String msg = game.consonantsEnemyName(enemyName);
 
         return msg;
     }

@@ -132,7 +132,7 @@ public class Game {
      * the user in all levels
      * 
      * @param lootName The name of the loot that is going to be counted
-     * @return
+     * @return A String with amount of a loot found in all levels
      */
     public String countLootAllLevels(String lootName) {
         String msg = "";
@@ -283,6 +283,7 @@ public class Game {
      * This function will clasificate a player according to his score
      * 
      * @param player the player object
+     * @return A boolean confirming the operation
      */
     public boolean clasificatePlayerAccordingToScore(Player player) {
         boolean isDone = false;
@@ -395,6 +396,31 @@ public class Game {
             }
         }
         
+        return msg;
+    }
+
+    /**
+     * This function receives a String and returns the number of consonants in it
+     * 
+     * @param enemyName A String given by the user
+     * @return A String with the amount of consonants
+     */
+    public String consonantsEnemyName(String enemyName) {
+        String msg = "";
+        String [] vowals = {"a", "e", "i", "o", "u"};
+        String [] word = enemyName.split("");
+        int acu = word.length;
+
+        for (int i = 0; i < word.length; i++) {
+            for (int j = 0; j < vowals.length; j++) {
+                if (word[i].equalsIgnoreCase(vowals[j])) {
+                    acu -= 1;
+                }
+            }
+        }
+
+        msg = "El numero de consonantes en el nombre son: " + acu;
+
         return msg;
     }
 }
