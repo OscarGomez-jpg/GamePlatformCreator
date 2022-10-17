@@ -68,6 +68,7 @@ public class Main {
                         "5. Ver el tesoro que mas se repite\n" +
                         "6. Ver la cantidad de un tipo de enemigo en todos los niveles\n" +
                         "7. Agregar jugador\n" +
+                        "8. Incrementar el puntaje de un jugador\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -136,6 +137,15 @@ public class Main {
             case 7: {
                 //Add a player to the game
                 msg = uiAddPlayer();
+
+                System.out.println(msg);
+
+                break;
+            }
+
+            case 8: {
+                //Increase the level of a player
+                msg = uiIncreaseLevelOfPlayer();
 
                 System.out.println(msg);
 
@@ -338,6 +348,29 @@ public class Main {
         String name = reader.next();
 
         msg = game.addPlayer(nickname, name);
+
+        return msg;
+    }
+
+    /**
+     * This function increase the level of a player
+     * 
+     * @return A String with the new level of the player
+     */
+    public String uiIncreaseLevelOfPlayer() {
+        String msg = "";
+
+        try {
+            System.out.println("Ingrese el nickname del jugador: ");
+            String nickname = reader.next();
+    
+            System.out.println("Ingrese la cantidad de puntaje que desea agregar: ");
+            double score = reader.nextDouble();
+    
+            msg = game.increaseLevelOfPlayer(nickname, score);
+        } catch (Exception inputMismatchException) {
+            msg = "Por favor ingrese un numero valido";
+        }
 
         return msg;
     }

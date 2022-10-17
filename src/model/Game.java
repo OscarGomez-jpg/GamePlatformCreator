@@ -19,7 +19,9 @@ public class Game {
     /**
      * This function creates the 10 levels that the game use
      * 
-     * @param pointsToNextLevel The points that the player need to go to the next level, it adds 100 every time
+     * @param pointsToNextLevel The points that the player need to go to the next
+     *                          level, it adds the acumulation of pointsToNextLevel
+     *                          Every time
      */
     public void generateInitialLevels(double pointsToNextLevel) {
         Level newLevel;
@@ -27,18 +29,20 @@ public class Game {
         String id = "";
         for (int i = 0; i < LEVELS_SIZE; i++) {
             if (this.levels[i] == null) {
-                id = String.valueOf(i + 1);
+                id = String.valueOf(pointsToNextLevel);
                 newLevel = new Level(id, pointsToNextLevel);
-                
+
+                System.out.println(id);
+
                 if (i < LEVELS_SIZE - 1) {
-                    
+
                     pointsToNextLevel = acu + pointsToNextLevel;
-                    
+
                 }
-                
+
                 this.levels[i] = newLevel;
 
-            } 
+            }
         }
     }
 
@@ -187,7 +191,8 @@ public class Game {
 
     /**
      * This function takes a String that represents the enemy type from the enmy
-     * that was added to the game. Uses a HashMap to store the amount of an enemy type in the game
+     * that was added to the game. Uses a HashMap to store the amount of an enemy
+     * type in the game
      * 
      * @param type A String containing the enemy type that was added to a level
      */
@@ -224,8 +229,9 @@ public class Game {
     /**
      * This function adds a player to the game if the player nickname doesn't exists
      * 
-     * @param nickname Nickname and identifier of the player that is going to be added
-     * @param name name of the player that is going to be added
+     * @param nickname Nickname and identifier of the player that is going to be
+     *                 added
+     * @param name     name of the player that is going to be added
      * @return String validating the operation
      */
     public String addPlayer(String nickname, String name) {
@@ -239,9 +245,9 @@ public class Game {
 
         Player newPlayer = new Player(nickname, name);
 
-        clasificatePlayerAccordingToScore(newPlayer);
+        boolean confirm = clasificatePlayerAccordingToScore(newPlayer);
 
-        if (getLevelOfPlayer(nickname) != -1) {
+        if (confirm == false) {
             msg = "No se ha podido agregar el jugador";
         }
 
@@ -252,13 +258,14 @@ public class Game {
      * Returns the position of the level where is positionated the player
      * 
      * @param playerNickName Identifier of the player
-     * @return -1 if the player is not found, otherwise will return the level of the player
+     * @return -1 if the player is not found, otherwise will return the level of the
+     *         player
      */
     public int getLevelOfPlayer(String playerNickName) {
         int pos = -1;
         boolean isFound = false;
 
-        for (int i = 0; i < LEVELS_SIZE && !isFound; i++) {
+        for (int i = 0; i < LEVELS_SIZE && isFound == false; i++) {
             if (levels[i].checkPlayerByNickname(playerNickName)) {
                 pos = i;
                 isFound = true;
@@ -273,22 +280,59 @@ public class Game {
      * 
      * @param player the player object
      */
-    public void clasificatePlayerAccordingToScore(Player player) {
+    public boolean clasificatePlayerAccordingToScore(Player player) {
+        boolean isDone = false;
         boolean isFound = false;
         int playerOldPos = getLevelOfPlayer(player.getNickname());
-        
+
         if (playerOldPos != -1) {
             levels[playerOldPos].deletePlayer(player.getNickname());
-
-        } else {
-            double playerScore = player.getScore();
-            
-            for (int i = 0; i < LEVELS_SIZE && !isFound; i++) {
-                if (levels[i].getNextLevelScore() < playerScore) {
-                    levels[i].addPlayer(player);
-                    isFound = true;
-                }
+        }
+        
+        for (int i = 0; i < LEVELS_SIZE && isFound == false; i++) {
+            if (levels[i].getNextLevelScore() > player.getScore()) {
+                levels[i].addPlayer(player);
+                isDone = true;
+                isFound = true;
+            } else if (i == LEVELS_SIZE - 1) {
+                levels[i].addPlayer(player);
+                isDone = true;
             }
         }
+
+        return isDone;
+    }
+
+    /**
+     * This function will increase the level of a player, if the player score is bigger
+     * than the score needed to go to the next level, the player will be put in that level
+     * otherwise, will show the score needed to go to the next level
+     * 
+     * @param nickname Nickname of the player that is going to change its level
+     * @param pointsGiven The amount of score that is going to be added
+     * @return A String with the new level of the player with the score needed to go to the next level
+     */
+    public String increaseLevelOfPlayer(String nickname, double pointsGiven) {
+        String msg = "No se ha encontrado el jugador";
+        
+        int pos = getLevelOfPlayer(nickname);
+        
+        if (pos != -1) {
+            System.out.println(pos);
+            
+            Player player = levels[pos].getPlayerByNickname(nickname);
+
+            player.setScore(player.getScore() + pointsGiven);
+
+            clasificatePlayerAccordingToScore(player);
+
+            double total = (levels[pos].getNextLevelScore() - player.getScore());
+
+            msg = "Jugador ascendido con exito al nivel " + (getLevelOfPlayer(player.getNickname()) + 1) + "\n" +
+                    "faltan " + total + " puntos para cambiar de nivel \n";
+            
+        } 
+
+        return msg;
     }
 }

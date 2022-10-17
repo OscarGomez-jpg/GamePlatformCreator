@@ -77,10 +77,15 @@ public class Level {
         return msg;
     }
 
+    /**
+     * This functions adds a player to the level
+     * @param player Th player that is going to be added
+     * @return
+     */
     public String addPlayer(Player player) {
         String msg = "";
 
-        if (players.containsKey(player.getName())) {
+        if (checkPlayerByNickname(player.getNickname())) {
             msg = "No se puede añadir el jugador porque ya esta en el nivel";
         } else {
             players.put(player.getName(), player);
@@ -90,10 +95,19 @@ public class Level {
         return msg;
     }
 
+    /**
+     * This funtion deletes the player from the game
+     * @param playerNickname The player that is going to be deleted
+     */
     public void deletePlayer(String playerNickname) {
         players.remove(playerNickname);
     }
 
+    /**
+     * This function checks if a player exists in the level
+     * @param playerNickname Nickname (id) of the player
+     * @return a boolean with a true if the player exists otherwise a false
+     */
     public boolean checkPlayerByNickname(String playerNickname) {
         boolean isFound = false;
 
@@ -102,6 +116,22 @@ public class Level {
         }
 
         return isFound;
+    }
+
+    /**
+     * This function returns the object player by its nickname
+     * 
+     * @param playerNickname identifier of the player
+     * @return an object Player that is needed
+     */
+    public Player getPlayerByNickname(String playerNickname) {
+        Player player = null;
+
+        if (checkPlayerByNickname(playerNickname)) {
+            player = players.get(playerNickname);
+        }
+
+        return player;
     }
 
     /**
