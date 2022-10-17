@@ -14,22 +14,31 @@ public class Game {
         this.levels = new Level[LEVELS_SIZE];
         this.lootNames = new HashMap<String, Integer>();
         this.typeEnemies = new HashMap<String, Integer>();
-
-        generateInitialLevels();
     }
 
     /**
      * This function creates the 10 levels that the game use
+     * 
+     * @param pointsToNextLevel The points that the player need to go to the next level, it adds 100 every time
      */
-    public void generateInitialLevels() {
+    public void generateInitialLevels(double pointsToNextLevel) {
         Level newLevel;
+        double acu = pointsToNextLevel;
         String id = "";
         for (int i = 0; i < LEVELS_SIZE; i++) {
             if (this.levels[i] == null) {
                 id = String.valueOf(i + 1);
-                newLevel = new Level(id, 0, 0);
+                newLevel = new Level(id, pointsToNextLevel);
+                
+                if (i < LEVELS_SIZE - 1) {
+                    
+                    pointsToNextLevel = acu + pointsToNextLevel;
+                    
+                }
+                
                 this.levels[i] = newLevel;
-            }
+
+            } 
         }
     }
 
@@ -150,7 +159,8 @@ public class Game {
     }
 
     /**
-     * This function will iterate through the loot names and returns a message with the most repeated
+     * This function will iterate through the loot names and returns a message with
+     * the most repeated
      * treasure through all levels
      * 
      * @return A String with the most repeated treasure through all levels
@@ -176,8 +186,8 @@ public class Game {
     }
 
     /**
-     * This function takes a String that represents the enemy type from the enmy that was
-     * added to the game. Uses a HashMap to store the amount of an enemy type in the game
+     * This function takes a String that represents the enemy type from the enmy
+     * that was added to the game. Uses a HashMap to store the amount of an enemy type in the game
      * 
      * @param type A String containing the enemy type that was added to a level
      */
@@ -209,5 +219,76 @@ public class Game {
         msg = "La cantidad de " + type + " en todos los niveles es: " + total;
 
         return msg;
+    }
+
+    /**
+     * This function adds a player to the game if the player nickname doesn't exists
+     * 
+     * @param nickname Nickname and identifier of the player that is going to be added
+     * @param name name of the player that is going to be added
+     * @return String validating the operation
+     */
+    public String addPlayer(String nickname, String name) {
+        String msg = "Jugador agregado exitosamente";
+
+        if (getLevelOfPlayer(nickname) != -1) {
+            msg = "El jugador ya se encuentra en el juego";
+
+            return msg;
+        }
+
+        Player newPlayer = new Player(nickname, name);
+
+        clasificatePlayerAccordingToScore(newPlayer);
+
+        if (getLevelOfPlayer(nickname) != -1) {
+            msg = "No se ha podido agregar el jugador";
+        }
+
+        return msg;
+    }
+
+    /**
+     * Returns the position of the level where is positionated the player
+     * 
+     * @param playerNickName Identifier of the player
+     * @return -1 if the player is not found, otherwise will return the level of the player
+     */
+    public int getLevelOfPlayer(String playerNickName) {
+        int pos = -1;
+        boolean isFound = false;
+
+        for (int i = 0; i < LEVELS_SIZE && !isFound; i++) {
+            if (levels[i].checkPlayerByNickname(playerNickName)) {
+                pos = i;
+                isFound = true;
+            }
+        }
+
+        return pos;
+    }
+
+    /**
+     * This function will clasificate a player according to his score
+     * 
+     * @param player the player object
+     */
+    public void clasificatePlayerAccordingToScore(Player player) {
+        boolean isFound = false;
+        int playerOldPos = getLevelOfPlayer(player.getNickname());
+        
+        if (playerOldPos != -1) {
+            levels[playerOldPos].deletePlayer(player.getNickname());
+
+        } else {
+            double playerScore = player.getScore();
+            
+            for (int i = 0; i < LEVELS_SIZE && !isFound; i++) {
+                if (levels[i].getNextLevelScore() < playerScore) {
+                    levels[i].addPlayer(player);
+                    isFound = true;
+                }
+            }
+        }
     }
 }

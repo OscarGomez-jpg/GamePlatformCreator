@@ -1,30 +1,34 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Level {
     public static final int AMOUNT_LOOTS = 50;
     public static final int AMOUNT_ENEMIES = 25;
 
     private String id;
     private difficultyLevel difficulty;
-    private int amountOfEnemies;
-    private int amountOfLoot;
     private int totalEnemies;
     private int totalLoots;
     private int totalPointsGiven;
     private int totalPointsTaken;
+    private double nextLevelScore;
 
     private Loot[] loots;
     private Enemy[] enemies;
 
-    public Level(String id, int amountOfEnemies, int amountOfLoot) {
+    private Map<String, Player> players;
+
+    public Level(String id, double nextLevelScore) {
         this.id = id;
-        this.amountOfEnemies = amountOfEnemies;
-        this.amountOfLoot = amountOfLoot;
         this.totalPointsGiven = 0;
         this.totalPointsTaken = 0;
+        this.nextLevelScore = nextLevelScore;
 
         this.loots = new Loot[AMOUNT_LOOTS];
         this.enemies = new Enemy[AMOUNT_ENEMIES];
+        this.players = new HashMap<String, Player>();
     }
 
     /**
@@ -71,6 +75,33 @@ public class Level {
         }
 
         return msg;
+    }
+
+    public String addPlayer(Player player) {
+        String msg = "";
+
+        if (players.containsKey(player.getName())) {
+            msg = "No se puede añadir el jugador porque ya esta en el nivel";
+        } else {
+            players.put(player.getName(), player);
+            msg = "Jugador agregado con exito";
+        }
+
+        return msg;
+    }
+
+    public void deletePlayer(String playerNickname) {
+        players.remove(playerNickname);
+    }
+
+    public boolean checkPlayerByNickname(String playerNickname) {
+        boolean isFound = false;
+
+        if (players.containsKey(playerNickname)) {
+            isFound = true;
+        }
+
+        return isFound;
     }
 
     /**
@@ -154,7 +185,11 @@ public class Level {
             this.difficulty = difficultyLevel.LOW;
         }
     }
- 
+   
+    public double getNextLevelScore() {
+        return nextLevelScore;
+    }
+
     public Loot[] getLoots() {
         return loots;
     }
@@ -166,8 +201,6 @@ public class Level {
     @Override
     public String toString() {
         return "Nivel:" + id + "\n" +
-                            "   Cantidad enemigos permitidos=" + amountOfEnemies + "\n" +
-                            "   Cantidad de tesoros permitidos=" + amountOfLoot + "\n" +
                             "   Total de enemigos=" + totalEnemies + "\n" +
                             "   Total de tesoros=" + totalLoots + "\n" +
                             "   Dificultad=" + difficulty + "\n";

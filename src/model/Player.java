@@ -6,11 +6,11 @@ public class Player {
     private double score;
     private int lives;
 
-    public Player(String nickname, String name, double score, int lives) {
+    public Player(String nickname, String name) {
         this.nickname = nickname;
         this.name = name;
-        this.score = score;
-        this.lives = lives;
+        this.score = 10;
+        this.lives = 5;
     }
 
     public String getName() {

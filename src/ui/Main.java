@@ -2,6 +2,7 @@ package ui;
 
 import model.Game;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -21,6 +22,16 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         int option = 0;
+        boolean isDone = false;
+
+        do {
+            isDone = main.uiInitializeLevels();
+
+            if (isDone == false) {
+                System.out.println("Ingrese un valor valido");
+            }
+
+        } while (!isDone);
 
         do {
 
@@ -28,6 +39,7 @@ public class Main {
             main.executeOption(option);
 
         } while (option != 0);
+
     }
 
     public int validateIntegerOption() {
@@ -44,16 +56,18 @@ public class Main {
         return option;
     }
 
+    
     public int getOptionShowMenu() {
         int option = 0;
         System.out.println("<<<<< Bienvenido a la plataforma de desarrollo de videojuegos >>>>>");
         System.out.println(
-                "1. Agregar un tesoro a un nivel\n" +
-                        "2. Agregar un enemigo a un nivel\n" +
-                        "3. Mostrar los tesoros y enemigos de un nivel\n" +
+            "1. Agregar un tesoro a un nivel\n" +
+            "2. Agregar un enemigo a un nivel\n" +
+            "3. Mostrar los tesoros y enemigos de un nivel\n" +
                         "4. Cantidad de un tesoro en todos los niveles\n" +
                         "5. Ver el tesoro que mas se repite\n" +
                         "6. Ver la cantidad de un tipo de enemigo en todos los niveles\n" +
+                        "7. Agregar jugador\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -101,18 +115,27 @@ public class Main {
             }
 
             case 5: {
-                //Most repeated loot
+                // Most repeated loot
                 msg = uiMostRepeatedLootAllLevels();
 
                 System.out.println(msg);
 
                 break;
             }
-            
+
             case 6: {
-                //Most repeated enemy type in all levels
+                // Most repeated enemy type in all levels
 
                 msg = uiMostReapeatedEnemyTypeAllLevels();
+
+                System.out.println(msg);
+
+                break;
+            }
+
+            case 7: {
+                //Add a player to the game
+                msg = uiAddPlayer();
 
                 System.out.println(msg);
 
@@ -129,6 +152,35 @@ public class Main {
                 break;
             }
         }
+    }
+
+    /**
+     * This function intialize the 10 levels of the game
+     * 
+     * @return -1 if the number given by the user is not a double, otherwise will
+     *         return the number given by the user
+     */
+    public boolean uiInitializeLevels() {
+        boolean isDone = true;
+        double amount = 0;
+        System.out.println("... Iniciando la plataforma");
+        System.out.println("Ingrese los puntos necesarios para que el jugador pase de nivel");
+        System.out.println("El numero debe de ser mayor a 10 puesto que es el puntaje con el que inicial el jugador");
+
+        try {
+            amount = reader.nextDouble();
+
+            if (amount < 10) {
+                throw new InputMismatchException();
+            }
+
+            game.generateInitialLevels(amount);
+
+        } catch (Exception inputMismatchException) {
+            isDone = false;
+        }
+
+        return isDone;
     }
 
     /**
@@ -253,7 +305,7 @@ public class Main {
     }
 
     /**
-     * This function get an enemy type given by the user and return a String 
+     * This function get an enemy type given by the user and return a String
      * with how many times that type appears in all levels
      * 
      * @return a String with the occurences of the enemy type
@@ -267,6 +319,25 @@ public class Main {
         type = type.toLowerCase();
 
         msg = game.typeInAllLevels(type);
+
+        return msg;
+    }
+
+    /**
+     * This function adds a player to the game
+     * 
+     * @return A String confirming the operation
+     */
+    public String uiAddPlayer() {
+        String msg = "";
+
+        System.out.println("Ingrese el nickname del jugador: ");
+        String nickname = reader.next();
+
+        System.out.println("Ingrese el nombre del jugador: ");
+        String name = reader.next();
+
+        msg = game.addPlayer(nickname, name);
 
         return msg;
     }
