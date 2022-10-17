@@ -32,8 +32,6 @@ public class Game {
                 id = String.valueOf(pointsToNextLevel);
                 newLevel = new Level(id, pointsToNextLevel);
 
-                System.out.println(id);
-
                 if (i < LEVELS_SIZE - 1) {
 
                     pointsToNextLevel = acu + pointsToNextLevel;
@@ -332,6 +330,34 @@ public class Game {
                     "faltan " + total + " puntos para cambiar de nivel \n";
             
         } 
+
+        return msg;
+    }
+
+    /**
+     * This function returns a String with the enemy with that takes more score
+     * 
+     * @return String with the enemy with the highest score with the level it is located
+     */
+    public String reportTheEnemyWithHighestScore() {
+        String msg = "";
+        double acu = 0;
+        int posLevel = 0;
+        int posEnemy = 0; 
+
+        for (int i = 0; i < LEVELS_SIZE; i++) {
+            Level index = levels[i];
+            for (int j = 0; j < index.getEnemies().length; j++) {
+                if (index.getEnemies()[j] != null && index.getEnemies()[j].getPointsTaken() > acu) {
+                    acu = index.getEnemies()[j].getPointsTaken();
+                    posLevel = i;
+                    posEnemy = j;
+                }
+            }
+        }
+
+        msg = "El enemigo con más nivel es: " + levels[posLevel].getEnemies()[posEnemy].getName() + " con un puntaje de: " +
+        levels[posLevel].getEnemies()[posEnemy].getPointsTaken() + " en el nivel: " + (posLevel + 1);
 
         return msg;
     }

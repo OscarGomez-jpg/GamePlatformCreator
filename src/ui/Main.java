@@ -69,6 +69,7 @@ public class Main {
                         "6. Ver la cantidad de un tipo de enemigo en todos los niveles\n" +
                         "7. Agregar jugador\n" +
                         "8. Incrementar el puntaje de un jugador\n" +
+                        "9. Mostrar el enemigo con mas puntaje\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -146,6 +147,16 @@ public class Main {
             case 8: {
                 //Increase the level of a player
                 msg = uiIncreaseLevelOfPlayer();
+
+                System.out.println(msg);
+
+                break;
+            }
+
+            case 9: {
+                //Enemy with highest level
+
+                msg = uiEnemyWithHighestScore();
 
                 System.out.println(msg);
 
@@ -371,6 +382,19 @@ public class Main {
         } catch (Exception inputMismatchException) {
             msg = "Por favor ingrese un numero valido";
         }
+
+        return msg;
+    }
+
+    /**
+     * This function reports the enemy with the highest score
+     * 
+     * @return String with the enemy with the higher score and the level it is located
+     */
+    public String uiEnemyWithHighestScore() {
+        String msg = "";
+
+        msg = game.reportTheEnemyWithHighestScore();
 
         return msg;
     }
