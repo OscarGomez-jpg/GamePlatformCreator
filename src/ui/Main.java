@@ -26,10 +26,13 @@ public class Main {
 
         do {
             isDone = main.uiInitializeLevels();
-
+            
+            
             if (isDone == false) {
                 System.out.println("Ingrese un valor valido");
+                main.getReader().next();
             }
+            
 
         } while (!isDone);
 
@@ -207,7 +210,7 @@ public class Main {
         System.out.println("El numero debe de ser mayor a 10 puesto que es el puntaje con el que inicial el jugador");
 
         try {
-            amount = reader.nextDouble();
+            amount = getReader().nextDouble();
 
             if (amount < 10) {
                 throw new InputMismatchException();

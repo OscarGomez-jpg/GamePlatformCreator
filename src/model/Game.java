@@ -331,7 +331,7 @@ public class Game {
 
             clasificatePlayerAccordingToScore(player);
 
-            double total = (levels[pos].getNextLevelScore() - player.getScore());
+            double total = ((levels[pos].getNextLevelScore() - player.getScore()) * -1);
 
             playerScores.put(player.getNickname(), playerScores.get(player.getNickname()) + player.getScore());
 
