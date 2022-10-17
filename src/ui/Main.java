@@ -70,6 +70,7 @@ public class Main {
                         "7. Agregar jugador\n" +
                         "8. Incrementar el puntaje de un jugador\n" +
                         "9. Mostrar el enemigo con mas puntaje\n" +
+                        "10. Mostrar los jugadores con mas puntaje\n" +
                         "0. Exit. ");
 
         option = validateIntegerOption();
@@ -161,6 +162,14 @@ public class Main {
                 System.out.println(msg);
 
                 break;
+            }
+
+            case 10: {
+                //Top 5 players
+                
+                msg = uiPlayersWithHighestScore();
+
+                System.out.println(msg);
             }
 
             case 0: {
@@ -395,6 +404,19 @@ public class Main {
         String msg = "";
 
         msg = game.reportTheEnemyWithHighestScore();
+
+        return msg;
+    }
+
+    /**
+     * This function returns the top 5 players in the game
+     * 
+     * @return String with the top 5 players in the game
+     */
+    public String uiPlayersWithHighestScore() {
+        String msg = "";
+
+        msg = game.playersWithHighestScore();
 
         return msg;
     }

@@ -9,11 +9,13 @@ public class Game {
     private Level[] levels;
     private Map<String, Integer> lootNames;
     private Map<String, Integer> typeEnemies;
+    private Map<String, Double> playerScores;
 
     public Game() {
         this.levels = new Level[LEVELS_SIZE];
         this.lootNames = new HashMap<String, Integer>();
         this.typeEnemies = new HashMap<String, Integer>();
+        this.playerScores = new HashMap<String, Double>();
     }
 
     /**
@@ -243,12 +245,16 @@ public class Game {
 
         Player newPlayer = new Player(nickname, name);
 
+        
         boolean confirm = clasificatePlayerAccordingToScore(newPlayer);
-
+        
         if (confirm == false) {
             msg = "No se ha podido agregar el jugador";
+            return msg;
         }
-
+        
+        playerScores.put(nickname, newPlayer.getScore());
+        
         return msg;
     }
 
@@ -326,6 +332,8 @@ public class Game {
 
             double total = (levels[pos].getNextLevelScore() - player.getScore());
 
+            playerScores.put(player.getNickname(), playerScores.get(player.getNickname()) + player.getScore());
+
             msg = "Jugador ascendido con exito al nivel " + (getLevelOfPlayer(player.getNickname()) + 1) + "\n" +
                     "faltan " + total + " puntos para cambiar de nivel \n";
             
@@ -359,6 +367,34 @@ public class Game {
         msg = "El enemigo con más nivel es: " + levels[posLevel].getEnemies()[posEnemy].getName() + " con un puntaje de: " +
         levels[posLevel].getEnemies()[posEnemy].getPointsTaken() + " en el nivel: " + (posLevel + 1);
 
+        return msg;
+    }
+
+    /**
+     * This function returns a String with the top 5 best players
+     * 
+     * @return String with the top 5 players in a no specific order
+     */
+    public String playersWithHighestScore() {
+        String msg = "";
+        int pos = 0;
+        double biggerValue = 0;
+        Map<String, Double> keys = new HashMap<String, Double>();
+
+        Iterator<String> it = playerScores.keySet().iterator();
+        
+        for (int i = 0; i < 5; i++) {
+            while (it.hasNext()) {
+                String key = it.next();
+                if (keys.containsKey(key) == false && playerScores.get(key) > biggerValue) {
+                    biggerValue = playerScores.get(key);
+                    keys.put(key, playerScores.get(key));
+                    pos += 1;
+                    msg += "Jugador " + pos + " es " + key + " puntaje: " + biggerValue + "\n";
+                }
+            }
+        }
+        
         return msg;
     }
 }
